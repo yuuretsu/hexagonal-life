@@ -6,28 +6,36 @@
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
 	<body style="font-family: consolas;">
-		Birth if around.....
-		<input type="checkbox" id="b0">0
-		<input type="checkbox" id="b1">1
-		<input type="checkbox" id="b2">2
-		<input type="checkbox" id="b3" checked>3
-		<input type="checkbox" id="b4">4
-		<input type="checkbox" id="b5">5
-		<input type="checkbox" id="b6">6
-		... alive cells
-		<br>
-		Survive if around...
-		<input type="checkbox" id="s0">0
-		<input type="checkbox" id="s1">1
-		<input type="checkbox" id="s2" checked>2
-		<input type="checkbox" id="s3" checked>3
-		<input type="checkbox" id="s4">4
-		<input type="checkbox" id="s5">5
-		<input type="checkbox" id="s6">6
-		... alive cells
-		<br>
-		<button id="setRulesButton">Применить</button>
-		<button id="restartButton">Перезапустить</button>
+		<div style="
+			max-width: 450pt;
+			background-color: rgba(200, 200, 200, 0.75);
+			margin: 10px;
+			padding: 10px;
+			border-radius: 10px;
+		">
+			Birth if around.....
+			<input type="checkbox" id="b0">0
+			<input type="checkbox" id="b1">1
+			<input type="checkbox" id="b2">2
+			<input type="checkbox" id="b3" checked>3
+			<input type="checkbox" id="b4">4
+			<input type="checkbox" id="b5">5
+			<input type="checkbox" id="b6">6
+			... alive cells
+			<br>
+			Survive if around...
+			<input type="checkbox" id="s0">0
+			<input type="checkbox" id="s1">1
+			<input type="checkbox" id="s2" checked>2
+			<input type="checkbox" id="s3" checked>3
+			<input type="checkbox" id="s4">4
+			<input type="checkbox" id="s5">5
+			<input type="checkbox" id="s6">6
+			... alive cells
+			<br>
+			<button id="setRulesButton">Apply</button>
+			<button id="restartButton">Restart</button>
+		</div>
 		<canvas id="canvas" width="100" height="100">
 		<script src="main.js"></script>
 	</body>
