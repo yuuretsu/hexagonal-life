@@ -343,7 +343,10 @@ function getAround(world, coords) {
     return around;
 }
 const RADIUS = 4;
-const worldSize = new Vec(~~(innerWidth / (RADIUS * 2)) - 10, ~~(innerHeight / (RADIUS * Math.sqrt(3))) - 10);
+const worldSize = new Vec(
+    ~~(innerWidth / (RADIUS * 2)) - 10,
+    ~~(innerHeight / (RADIUS * Math.sqrt(3))) - 10
+);
 const canvas = new Canvas(new Vec(innerWidth, innerHeight), document.getElementById("canvas"));
 const world = new World(worldSize, RADIUS, canvas);
 let birthRule = [1];
