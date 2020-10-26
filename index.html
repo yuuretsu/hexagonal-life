@@ -7,13 +7,13 @@
 	</head>
 	<body style="font-family: consolas;">
 		<div style="
-			max-width: 450pt;
+			max-width: 420pt;
 			background-color: rgba(200, 200, 200, 0.75);
 			margin: 10px;
 			padding: 10px;
 			border-radius: 10px;
 		">
-			Birth if around.....
+			Birth if .....
 			<input type="checkbox" id="b0">0
 			<input type="checkbox" id="b1">1
 			<input type="checkbox" id="b2">2
@@ -21,9 +21,9 @@
 			<input type="checkbox" id="b4">4
 			<input type="checkbox" id="b5">5
 			<input type="checkbox" id="b6">6
-			... alive cells
+			... alive around
 			<br>
-			Survive if around...
+			Survive if ...
 			<input type="checkbox" id="s0">0
 			<input type="checkbox" id="s1">1
 			<input type="checkbox" id="s2" checked>2
@@ -31,10 +31,16 @@
 			<input type="checkbox" id="s4">4
 			<input type="checkbox" id="s5">5
 			<input type="checkbox" id="s6">6
-			... alive cells
+			... alive around
 			<br>
 			<button id="setRulesButton">Apply</button>
 			<button id="restartButton">Restart</button>
+			<button id="stepButton">Step</button>
+			<button id="pauseButton">Play / Pause</button>
+			<br>
+			<label for="speedRange" id="speedRangeLabel">Time per frame: 26ms.</label>
+			<br>
+			<input type="range" id="speedRange" style="width: 300pt;" min="13" max="1000" value="26">
 		</div>
 		<canvas id="canvas" width="100" height="100">
 		<script src="main.js"></script>

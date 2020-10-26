@@ -259,6 +259,12 @@ function start(world, update, draw) {
 }
 function update() {
     canvas.size = new Vec(innerWidth, innerHeight);
+    if (!paused && Date.now() - lastFrame >= timeForFrame) {
+        step();
+        lastFrame = Date.now();
+    }
+}
+function step() {
     grid = getNextWorld(grid);
 }
 function draw() {
@@ -343,10 +349,7 @@ function getAround(world, coords) {
     return around;
 }
 const RADIUS = 4;
-const worldSize = new Vec(
-    ~~(innerWidth / (RADIUS * 2)) - 10,
-    ~~(innerHeight / (RADIUS * Math.sqrt(3))) - 10
-);
+const worldSize = new Vec(~~(innerWidth / (RADIUS * 2)) - 10, ~~(innerHeight / (RADIUS * Math.sqrt(3))) - 10);
 const canvas = new Canvas(new Vec(innerWidth, innerHeight), document.getElementById("canvas"));
 const world = new World(worldSize, RADIUS, canvas);
 let birthRule = [1];
@@ -375,5 +378,20 @@ function getRules() {
 }
 document.getElementById("restartButton").onclick = restart;
 document.getElementById("setRulesButton").onclick = getRules;
+document.getElementById("stepButton").onclick = step;
+const speedRange = document.getElementById("speedRange");
+speedRange.oninput = () => {
+    timeForFrame = parseInt(speedRange.value);
+    document.getElementById("speedRangeLabel").innerHTML = `Time per frame: ${timeForFrame}ms.`;
+};
+document.getElementById("pauseButton").onclick = () => {
+    if (paused)
+        paused = false;
+    else
+        paused = true;
+};
+let paused = false;
+let lastFrame = Date.now();
+let timeForFrame = 26;
 restart();
 start(world, update, draw);
