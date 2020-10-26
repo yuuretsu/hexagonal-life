@@ -380,6 +380,10 @@ document.getElementById("restartButton").onclick = restart;
 document.getElementById("setRulesButton").onclick = getRules;
 document.getElementById("stepButton").onclick = step;
 const speedRange = document.getElementById("speedRange");
+speedRange.onchange = () => {
+    timeForFrame = parseInt(speedRange.value);
+    document.getElementById("speedRangeLabel").innerHTML = `Time per frame: ${timeForFrame}ms.`;
+};
 speedRange.oninput = () => {
     timeForFrame = parseInt(speedRange.value);
     document.getElementById("speedRangeLabel").innerHTML = `Time per frame: ${timeForFrame}ms.`;
