@@ -5,56 +5,53 @@
 		<title>Hexagonal Life</title>
 		<link rel="stylesheet" type="text/css" href="style.css" />
 	</head>
-	<body style="font-family: Arial, Helvetica, sans-serif;">
-		<div style="
-			max-width: 220pt;
-			background-color: rgba(200, 200, 200, 0.75);
-			margin: 10px;
-			padding: 10px;
-			border-radius: 10px;
-		">
-			<table>
-				<tr>
-					<th></th>
-					<th>0</th>
-					<th>1</th>
-					<th>2</th>
-					<th>3</th>
-					<th>4</th>
-					<th>5</th>
-					<th>6</th>
-				</tr>
-				<tr>
-					<td>Birth</td>
-					<td><input type="checkbox" id="b0"></td>
-					<td><input type="checkbox" id="b1"></td>
-					<td><input type="checkbox" id="b2"></td>
-					<td><input type="checkbox" id="b3" checked></td>
-					<td><input type="checkbox" id="b4"></td>
-					<td><input type="checkbox" id="b5"></td>
-					<td><input type="checkbox" id="b6"></td>
-				</tr>
-				<tr>
-					<td>Survive</td>
-					<td><input type="checkbox" id="s0"></td>
-					<td><input type="checkbox" id="s1"></td>
-					<td><input type="checkbox" id="s2" checked></td>
-					<td><input type="checkbox" id="s3" checked></td>
-					<td><input type="checkbox" id="s4"></td>
-					<td><input type="checkbox" id="s5"></td>
-					<td><input type="checkbox" id="s6"></td>
-				</tr>
-			</table>
-			<hr>
-			<button id="setRulesButton">Apply</button>
-			<button id="restartButton">Restart</button>
-			<button id="pauseButton">Pause</button>
-			<button id="stepButton" disabled>Step</button>
-			<hr>
-			<label for="speedRange" id="speedRangeLabel">Time per frame: 26ms.</label>
-			<input type="range" id="speedRange" style="width: 200pt;" min="13" max="1000" value="26">
+	<body>
+		<!-- Новый интерфейс -->
+		<div class="interactive-wrapper" id="interactive">
+			<div class="interactive-block">
+				<div class="selectors-block">
+					<div class="selector-wrapper">
+						<span class="selector-header">B</span>
+						<ul class="selector" id="selector-b">
+							<li data-param="0">0</li>
+							<li data-param="1">1</li>
+							<li data-param="2">2</li>
+							<li data-param="3" class="active-s">3</li>
+							<li data-param="4">4</li>
+							<li data-param="5">5</li>
+							<li data-param="6">6</li>
+						</ul>
+					</div>
+					<div class="selector-wrapper blue">
+						<span class="selector-header">S</span>
+						<ul class="selector" id="selector-s">
+							<li data-param="0">0</li>
+							<li data-param="1">1</li>
+							<li data-param="2" class="active-s">2</li>
+							<li data-param="3" class="active-s">3</li>
+							<li data-param="4">4</li>
+							<li data-param="5">5</li>
+							<li data-param="6">6</li>
+						</ul>
+					</div>
+				</div>
+				<div class="button-block">
+					<button class="apply" id="button-apply">Apply rules</button>
+					<div class="small-buttons">
+						<button class="button-small button-restart" id="button-restart"></button>
+						<button class="button-small button-step" id="button-step"></button>
+						<button class="button-small button-pause" id="button-pause"></button>
+						<!-- <button class="button-small button-close" id="close-interactive"></button> -->
+					</div>
+				</div>
+			</div>
 		</div>
+		<button class="interactive-call" id="open-interactive"><span class="lines"></span></button>
+
 		<canvas id="canvas" width="100" height="100">
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="ui.js"></script>
 		<script src="main.js"></script>
 	</body>
 </html>

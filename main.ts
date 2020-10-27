@@ -1,6 +1,6 @@
 function update() {
     canvas.size = new Vec(innerWidth, innerHeight);
-    if (!paused && Date.now() - lastFrame >= timeForFrame) {
+    if (!isPaused() && Date.now() - lastFrame >= timeForFrame) {
         step();
         lastFrame = Date.now();
     }
@@ -120,58 +120,22 @@ let grid: Grid<number>;
 function restart() {
     image = new HexImage(world);
     grid = randomize(new Grid(world));
-    getRules();
+    birthRule = getBParameters();
+    surviveRule = getSParameters();
 }
-
-function getRules() {
-    birthRule = [];
-    for (let i = 0; i <= 6; i++) {
-        const input = <HTMLInputElement>document.getElementById(`b${i}`);
-        if (input.checked) birthRule.push(i);
-    }
-    surviveRule = [];
-    for (let i = 0; i <= 6; i++) {
-        const input = <HTMLInputElement>document.getElementById(`s${i}`);
-        if (input.checked) surviveRule.push(i);
-    }
-}
-
-document.getElementById("restartButton").onclick = restart;
-
-document.getElementById("setRulesButton").onclick = getRules;
-
-const stepButton = <HTMLInputElement>document.getElementById("stepButton");
-stepButton.onclick = step;
-
-const speedRange = <HTMLInputElement>document.getElementById("speedRange");
-speedRange.onchange = () => {
-    timeForFrame = parseInt(speedRange.value);
-    document.getElementById("speedRangeLabel").innerHTML = `Time per frame: ${timeForFrame}ms.`;
-};
-
-speedRange.oninput = () => {
-    timeForFrame = parseInt(speedRange.value);
-    document.getElementById("speedRangeLabel").innerHTML = `Time per frame: ${timeForFrame}ms.`;
-};
-
-const pauseButton = document.getElementById("pauseButton");
-pauseButton.onclick = () => {
-    if (paused) {
-        paused = false;
-        pauseButton.innerHTML = 'Pause';
-        stepButton.disabled = true;
-    } else {
-        paused = true;
-        pauseButton.innerHTML = 'Play';
-        stepButton.disabled = false;
-    }
-};
-
-let paused = false;
 
 let lastFrame = Date.now();
 
 let timeForFrame = 26;
+
+onApply(() => {
+    birthRule = getBParameters();
+    surviveRule = getSParameters();
+});
+
+onRestart(() => restart());
+
+onStep(() => step());
 
 restart();
 
