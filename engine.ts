@@ -61,7 +61,7 @@ class World {
         this.drawingPoint = new Vec(
             this.camera.x - this.imageSize.x + this.canvas.width / 2,
             this.camera.y - this.imageSize.y + this.canvas.height / 2,
-        );
+        ).round();
     }
 }
 

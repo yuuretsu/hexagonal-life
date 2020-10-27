@@ -4,3 +4,23 @@
 	left: 0;
 	z-index: -1;
 }
+
+button {
+	transition-duration: 0.25s;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	width: 50pt;
+	height: 20pt;
+	shape-margin: 10pt;
+	background-color: rgb(240, 240, 240);
+}
+
+button:enabled:hover {
+	background-color: rgb(150, 150, 150);
+	color: white;
+}
+
+button:active:hover {
+	background-color: rgb(100, 100, 100);
+}

@@ -8,6 +8,9 @@ class Vec {
         this.x = x;
         this.y = y;
     }
+    round() {
+        return new Vec(Math.round(this.x), Math.round(this.y));
+    }
     toString() {
         return `${~~this.x}x${~~this.y}`;
     }
@@ -172,7 +175,7 @@ class World {
         return new Vec(x, y);
     }
     updateDrawingPoint() {
-        this.drawingPoint = new Vec(this.camera.x - this.imageSize.x + this.canvas.width / 2, this.camera.y - this.imageSize.y + this.canvas.height / 2);
+        this.drawingPoint = new Vec(this.camera.x - this.imageSize.x + this.canvas.width / 2, this.camera.y - this.imageSize.y + this.canvas.height / 2).round();
     }
 }
 class HexImage {
@@ -381,7 +384,8 @@ function getRules() {
 }
 document.getElementById("restartButton").onclick = restart;
 document.getElementById("setRulesButton").onclick = getRules;
-document.getElementById("stepButton").onclick = step;
+const stepButton = document.getElementById("stepButton");
+stepButton.onclick = step;
 const speedRange = document.getElementById("speedRange");
 speedRange.onchange = () => {
     timeForFrame = parseInt(speedRange.value);
@@ -391,11 +395,18 @@ speedRange.oninput = () => {
     timeForFrame = parseInt(speedRange.value);
     document.getElementById("speedRangeLabel").innerHTML = `Time per frame: ${timeForFrame}ms.`;
 };
-document.getElementById("pauseButton").onclick = () => {
-    if (paused)
+const pauseButton = document.getElementById("pauseButton");
+pauseButton.onclick = () => {
+    if (paused) {
         paused = false;
-    else
+        pauseButton.innerHTML = 'Pause';
+        stepButton.disabled = true;
+    }
+    else {
         paused = true;
+        pauseButton.innerHTML = 'Play';
+        stepButton.disabled = false;
+    }
 };
 let paused = false;
 let lastFrame = Date.now();

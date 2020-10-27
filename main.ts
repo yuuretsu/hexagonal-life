@@ -140,7 +140,8 @@ document.getElementById("restartButton").onclick = restart;
 
 document.getElementById("setRulesButton").onclick = getRules;
 
-document.getElementById("stepButton").onclick = step;
+const stepButton = <HTMLInputElement>document.getElementById("stepButton");
+stepButton.onclick = step;
 
 const speedRange = <HTMLInputElement>document.getElementById("speedRange");
 speedRange.onchange = () => {
@@ -153,9 +154,17 @@ speedRange.oninput = () => {
     document.getElementById("speedRangeLabel").innerHTML = `Time per frame: ${timeForFrame}ms.`;
 };
 
-document.getElementById("pauseButton").onclick = () => {
-    if (paused) paused = false;
-    else paused = true;
+const pauseButton = document.getElementById("pauseButton");
+pauseButton.onclick = () => {
+    if (paused) {
+        paused = false;
+        pauseButton.innerHTML = 'Pause';
+        stepButton.disabled = true;
+    } else {
+        paused = true;
+        pauseButton.innerHTML = 'Play';
+        stepButton.disabled = false;
+    }
 };
 
 let paused = false;

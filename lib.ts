@@ -10,6 +10,12 @@ class Vec {
         this.x = x;
         this.y = y;
     }
+    round() {
+        return new Vec(
+            Math.round(this.x),
+            Math.round(this.y)
+        );
+    }
     toString() {
         return `${~~this.x}x${~~this.y}`;
     }
