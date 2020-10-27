@@ -278,10 +278,14 @@ function randomize(grid) {
             const coords = new Vec(x, y);
             newGrid.setAt(coords, val);
             if (val === 1)
-                image.fillCircle(coords, RADIUS, 'rgb(100, 100, 100)');
+                drawCell(coords);
         }
     }
     return newGrid;
+}
+function drawCell(coords) {
+    const color = `rgb(100, 100, 100)`;
+    image.fillCircle(coords, RADIUS, color);
 }
 function getNextWorld(grid) {
     const newGrid = new Grid(grid.world);
@@ -293,7 +297,7 @@ function getNextWorld(grid) {
             newGrid.setAt(coords, nextCell);
             if (nowCell === 0) {
                 if (nextCell === 1)
-                    image.fillCircle(coords, RADIUS, 'rgb(100, 100, 100)');
+                    drawCell(coords);
             }
             else {
                 if (nextCell === 0)
@@ -348,12 +352,12 @@ function getAround(world, coords) {
     }
     return around;
 }
-const RADIUS = 4;
+const RADIUS = 6;
 const worldSize = new Vec(~~(innerWidth / (RADIUS * 2)) - 10, ~~(innerHeight / (RADIUS * Math.sqrt(3))) - 10);
 const canvas = new Canvas(new Vec(innerWidth, innerHeight), document.getElementById("canvas"));
 const world = new World(worldSize, RADIUS, canvas);
-let birthRule = [1];
-let surviveRule = [2, 3];
+let birthRule;
+let surviveRule;
 let image;
 let grid;
 function restart() {
@@ -374,7 +378,6 @@ function getRules() {
         if (input.checked)
             surviveRule.push(i);
     }
-    console.log(birthRule, surviveRule);
 }
 document.getElementById("restartButton").onclick = restart;
 document.getElementById("setRulesButton").onclick = getRules;

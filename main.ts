@@ -21,10 +21,15 @@ function randomize(grid: Grid<number>): Grid<number> {
             const val = randInt(0, 2);
             const coords = new Vec(x, y);
             newGrid.setAt(coords, val);
-            if (val === 1) image.fillCircle(coords, RADIUS, 'rgb(100, 100, 100)');
+            if (val === 1) drawCell(coords);
         }
     }
     return newGrid;
+}
+
+function drawCell(coords: Vec) {
+    const color = `rgb(100, 100, 100)`;
+    image.fillCircle(coords, RADIUS, color);
 }
 
 function getNextWorld(grid: Grid<number>): Grid<number> {
@@ -36,7 +41,7 @@ function getNextWorld(grid: Grid<number>): Grid<number> {
             const nextCell = getNextCell(nowCell, getAround(grid, coords));
             newGrid.setAt(coords, nextCell);
             if (nowCell === 0) {
-                if (nextCell === 1) image.fillCircle(coords, RADIUS, 'rgb(100, 100, 100)');
+                if (nextCell === 1) drawCell(coords);
             } else {
                 if (nextCell === 0) image.clearAt(coords);
             }
@@ -93,7 +98,7 @@ function getAround(world: Grid<number>, coords: Vec): number {
     return around;
 }
 
-const RADIUS = 4;
+const RADIUS = 6;
 
 const worldSize = new Vec(
     ~~(innerWidth / (RADIUS * 2)) - 10,
@@ -107,8 +112,8 @@ const canvas = new Canvas(
 
 const world = new World(worldSize, RADIUS, canvas);
 
-let birthRule = [1];
-let surviveRule = [2, 3];
+let birthRule: number[];
+let surviveRule: number[];
 let image: HexImage;
 let grid: Grid<number>;
 
@@ -129,7 +134,6 @@ function getRules() {
         const input = <HTMLInputElement>document.getElementById(`s${i}`);
         if (input.checked) surviveRule.push(i);
     }
-    console.log(birthRule, surviveRule);
 }
 
 document.getElementById("restartButton").onclick = restart;
