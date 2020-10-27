@@ -149,7 +149,7 @@ class World {
         this.size = size;
         this.hexRadius = hexRadius;
         this.hexSize = new Vec(hexRadius * 2, hexRadius * Math.sqrt(3));
-        this.imgBorder = 20;
+        this.imgBorder = 10;
         this.cornerRadius = this.imgBorder + this.hexRadius;
         this.imageSize = new Vec(this.hexSize.x * size.x + hexRadius + this.imgBorder * 2, ((size.y - 1) * this.hexSize.y + this.hexSize.x) + this.imgBorder * 2);
         this.camera = new Vec(this.imageSize.x / 2, this.imageSize.y / 2);
@@ -201,7 +201,11 @@ class HexImage {
     }
     fillCircle(coords, radius, style) {
         const point = this.world.getLocalHexCenter(coords);
-        this.getLayer(coords).fillPath(Canvas.circle(point, Math.min(radius, this.world.hexRadius)), style);
+        const layer = this.getLayer(coords);
+        layer.ctx.fillStyle = style;
+        layer.ctx.beginPath();
+        layer.ctx.arc(point.x, point.y, Math.min(radius, this.world.hexRadius), 0, Math.PI * 2);
+        layer.ctx.fill();
     }
     clearAt(coords) {
         const point = this.world.getLocalHexCenter(coords);

@@ -22,7 +22,7 @@ class World {
             hexRadius * 2,
             hexRadius * Math.sqrt(3),
         );
-        this.imgBorder = 20;
+        this.imgBorder = 10;
         this.cornerRadius = this.imgBorder + this.hexRadius;
         this.imageSize = new Vec(
             this.hexSize.x * size.x + hexRadius + this.imgBorder * 2,
@@ -90,10 +90,17 @@ class HexImage {
     }
     fillCircle(coords: Vec, radius: number, style: DrawStyle) {
         const point = this.world.getLocalHexCenter(coords);
-        this.getLayer(coords).fillPath(
-            Canvas.circle(point, Math.min(radius, this.world.hexRadius)),
-            style
+        const layer = this.getLayer(coords);
+        layer.ctx.fillStyle = style;
+        layer.ctx.beginPath();
+        layer.ctx.arc(
+            point.x,
+            point.y,
+            Math.min(radius, this.world.hexRadius),
+            0,
+            Math.PI * 2
         );
+        layer.ctx.fill();
     }
     clearAt(coords: Vec) {
         const point = this.world.getLocalHexCenter(coords);
